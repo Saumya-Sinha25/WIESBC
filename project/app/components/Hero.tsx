@@ -1,9 +1,10 @@
-import React from "react";
-import { Vortex } from "@/components/ui/vortex";
+import React, { memo } from "react";
+import Image from "next/image";
 import { Sparkles } from "lucide-react";
-import CustomLogo from "../assets/cslogo.jpg"; // Make sure to add your logo
+import { Vortex } from "@/components/ui/vortex";
+import CustomLogo from "../public/cslogo.jpg";
 
-export default function VortexDemoSecond() {
+const VortexDemoSecond = memo(() => {
   return (
     <div className="w-[calc(100%-4rem)] mx-auto rounded-md h-screen overflow-hidden">
       <Vortex
@@ -23,9 +24,14 @@ export default function VortexDemoSecond() {
               <div className="relative">
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 to-amber-300 opacity-75 blur-lg animate-pulse" />
                 <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden">
-                  <img
-                    src={CustomLogo.src || "/placeholder.svg"}
-                    alt="Custom Logo"
+                  <Image
+                    src={CustomLogo.src}
+                    alt="CS Logo"
+                    width={80}
+                    height={80}
+                    priority
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAAAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3BhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADTLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAwADEANv/bAEMAFA4PEg8NFBIQEhcUDQwMDBcVExMVGhEYGBsdGhwcICghICokJSgqLCMhJi0uKyguLTUzMjM1QkFCRUBHREZNUP/bAEMBFRcXGhobKR0dKUJCQlBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUP/AABEIAAUACgMBIgACEQEDEQH/xAAVAAEBAAAAAAAAAAAAAAAAAAAABf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AlgAH/9k="
                     className="w-full h-full object-cover animate-pulse"
                   />
                 </div>
@@ -54,4 +60,8 @@ export default function VortexDemoSecond() {
       </Vortex>
     </div>
   );
-}
+});
+
+VortexDemoSecond.displayName = 'VortexDemoSecond';
+
+export default VortexDemoSecond;

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "motion/react";
+import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -19,15 +19,21 @@ export default function WorldMap({
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const map = new DottedMap({ height: 100, grid: "diagonal" });
-
   const { theme } = useTheme();
-
   const svgMap = map.getSVG({
     radius: 0.22,
     color: "#404040",
     shape: "circle",
     backgroundColor: "#000000",
   });
+
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (dots.length > 0) {
+      setHasAnimated(true);
+    }
+  }, [dots]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -59,7 +65,7 @@ export default function WorldMap({
         viewBox="0 0 800 400"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
-        {dots.map((dot, i) => {
+        {hasAnimated && dots.map((dot, i) => {
           if (i < dots.length - 1) {
             const startPoint = projectPoint(dot.lat, dot.lng);
             const endPoint = projectPoint(dots[i + 1].lat, dots[i + 1].lng);
@@ -97,7 +103,7 @@ export default function WorldMap({
           </linearGradient>
         </defs>
 
-        {dots.map((dot, i) => (
+        {hasAnimated && dots.map((dot, i) => (
           <g key={`point-group-${i}`}>
             <circle
               cx={projectPoint(dot.lat, dot.lng).x}
