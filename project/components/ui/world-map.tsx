@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, memo } from "react";
 import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 import Image from "next/image";
@@ -12,7 +12,7 @@ interface MapProps {
   className?: string;
 }
 
-export default function WorldMap({
+export default memo(function WorldMap({
   dots = [],
   lineColor = "#f59e0b",
   className = "",
@@ -140,4 +140,4 @@ export default function WorldMap({
       </svg>
     </div>
   );
-}
+});

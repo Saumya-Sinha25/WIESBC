@@ -2,14 +2,6 @@
 import React, { memo, useEffect, useRef, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 
-const TypewriterEffectSmooth = dynamic(
-  () => import("@/components/ui/typewriter-effect").then((mod) => mod.TypewriterEffectSmooth),
-  { 
-    ssr: false, 
-    loading: () => <div className="h-20 w-full"></div> // Add placeholder
-  }
-);
-
 const WorldMap = dynamic(
   () => import("@/components/ui/world-map").then((mod) => mod.default),
   { 
@@ -21,21 +13,6 @@ const WorldMap = dynamic(
 const About = memo(() => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  const words = useMemo(() => [
-    {
-      text: "Together",
-      className: "text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-    },
-    {
-      text: "We",
-      className: "text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-    },
-    {
-      text: "Advance",
-      className: "text-amber-400 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-    }
-  ], []);
 
   const dots = useMemo(() => [
     { lat: 64.2008, lng: -149.4937 }, 
@@ -74,13 +51,9 @@ const About = memo(() => {
       <div className="w-[calc(100%-4rem)] mx-auto rounded-md overflow-hidden">
         <div className="bg-black backdrop-blur-sm p-8 pb-4">
           <div className="flex flex-col items-center justify-center min-h-[20rem]">
-            {hasAnimated && (
-              <TypewriterEffectSmooth 
-                words={words} 
-                cursorClassName="bg-amber-400"
-              />
-            )}
-
+            <h2 className="text-5xl font-extrabold mt-8 mb-4">
+              <span className='text-white'>Together</span> We <span className='text-amber-500'>Advance</span>
+            </h2>
             <p className="text-gray-400 text-sm sm:text-lg md:text-xl lg:text-2xl mt-8 max-w-3xl text-center">
               A Global Network of Innovators: Connected Across Continents, United by Technology.
             </p>
