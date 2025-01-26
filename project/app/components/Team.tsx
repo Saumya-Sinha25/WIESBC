@@ -1,10 +1,10 @@
 import React, { memo } from "react"
 import Image from "next/image"
 import { Linkedin, Github } from "lucide-react"
-import Anant from "../public/anant.jpg"
-import Gaurang from "../public/gaurang.jpg"
-import Kshitij from "../public/kshitij.jpg"
-import Sahil from "../public/sahil.jpg"     
+import Anant from "../public/Anant.jpg"
+import Gaurang from "../public/Gaurang.jpg"
+import Kshitij from "../public/Kshitij.jpg"
+import Sahil from "../public/Sahil.jpg"     
 
 const TeamSection = memo(() => {
   const teamMembers = [
