@@ -7,10 +7,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 interface MapProps {
-  dots?: Array<{
-    start: { lat: number; lng: number; label?: string };
-    end: { lat: number; lng: number; label?: string };
-  }>;
+  dots?: Array<{ lat: number; lng: number }>;
   lineColor?: string;
   className?: string;
 }
@@ -63,30 +60,32 @@ export default function WorldMap({
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
         {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
-          return (
-            <g key={`path-group-${i}`}>
-              <motion.path
-                d={createCurvedPath(startPoint, endPoint)}
-                fill="none"
-                stroke="url(#path-gradient)"
-                strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
-                transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
-                  ease: "easeOut",
-                }}
-                key={`start-upper-${i}`}
-              ></motion.path>
-            </g>
-          );
+          if (i < dots.length - 1) {
+            const startPoint = projectPoint(dot.lat, dot.lng);
+            const endPoint = projectPoint(dots[i + 1].lat, dots[i + 1].lng);
+            return (
+              <g key={`path-group-${i}`}>
+                <motion.path
+                  d={createCurvedPath(startPoint, endPoint)}
+                  fill="none"
+                  stroke="url(#path-gradient)"
+                  strokeWidth="1"
+                  initial={{
+                    pathLength: 0,
+                  }}
+                  animate={{
+                    pathLength: 1,
+                  }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.5 * i,
+                    ease: "easeOut",
+                  }}
+                />
+              </g>
+            );
+          }
+          return null;
         })}
 
         <defs>
@@ -99,71 +98,37 @@ export default function WorldMap({
         </defs>
 
         {dots.map((dot, i) => (
-          <g key={`points-group-${i}`}>
-            <g key={`start-${i}`}>
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
+          <g key={`point-group-${i}`}>
+            <circle
+              cx={projectPoint(dot.lat, dot.lng).x}
+              cy={projectPoint(dot.lat, dot.lng).y}
+              r="2"
+              fill={lineColor}
+            />
+            <circle
+              cx={projectPoint(dot.lat, dot.lng).x}
+              cy={projectPoint(dot.lat, dot.lng).y}
+              r="2"
+              fill={lineColor}
+              opacity="0.5"
+            >
+              <animate
+                attributeName="r"
+                from="2"
+                to="8"
+                dur="1.5s"
+                begin="0s"
+                repeatCount="indefinite"
               />
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
-            <g key={`end-${i}`}>
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
+              <animate
+                attributeName="opacity"
+                from="0.5"
+                to="0"
+                dur="1.5s"
+                begin="0s"
+                repeatCount="indefinite"
               />
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
+            </circle>
           </g>
         ))}
       </svg>
