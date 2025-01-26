@@ -42,4 +42,8 @@ const Team = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Team;
+=======
+export default Team;
+>>>>>>> a3567d323f9de7cefbf97c9aaf89a1b5f1c94668
