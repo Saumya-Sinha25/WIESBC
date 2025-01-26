@@ -1,27 +1,19 @@
+import React from 'react';
 import { Calendar } from "lucide-react"
+import Link from 'next/link';
 
 export default function EventsSection() {
   const events = [
     {
       icon: <Calendar className="w-8 h-8 text-amber-400 mb-4" />,
-      title: "Technical Workshop",
-      description: "Introduction to Machine Learning with Python",
+      title: "WebWars 2025",
+      description: "Compete, Create, and Conquer! Join the WebWars 2025—May the creativity be with you as teams battle for the ultimate prize",
       date: "March 25, 2024 • 3:00 PM",
-    },
-    {
-      icon: <Calendar className="w-8 h-8 text-amber-400 mb-4" />,
-      title: "Guest Lecture",
-      description: "Cybersecurity in the Age of AI",
-      date: "April 2, 2024 • 4:30 PM",
-    },
-    {
-      icon: <Calendar className="w-8 h-8 text-amber-400 mb-4" />,
-      title: "Hackathon",
-      description: "24-Hour Coding Challenge",
-      date: "April 15-16, 2024",
-    },
+      registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLScIU67nD3WkkSa_CeIJXIkIrFV-unWa3yTGyg5Cy2wHOE1Zzw/viewform"
+,
+    }
+    
   ]
-
   return (
     <section id="events" className="py-16">
       <div className="w-[calc(100%-4rem)] mx-auto rounded-md overflow-hidden">
@@ -39,6 +31,9 @@ export default function EventsSection() {
                 </h3>
                 <p className="text-gray-400 mb-4">{event.description}</p>
                 <p className="text-sm text-amber-400">{event.date}</p>
+                <Link href={event.registrationLink} className="mt-4 inline-block bg-amber-400 text-black py-2 px-4 rounded transition hover:bg-amber-500">
+                  Register Now
+                </Link>
               </div>
             ))}
           </div>
