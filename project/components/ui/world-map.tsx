@@ -10,6 +10,7 @@ interface MapProps {
   dots?: Array<{ lat: number; lng: number }>;
   lineColor?: string;
   className?: string;
+  animateLines?: boolean;
 }
 
 export default memo(function WorldMap({

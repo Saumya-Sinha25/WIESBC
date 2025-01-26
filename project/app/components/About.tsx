@@ -28,8 +28,8 @@ const About = memo(() => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
+        if (entry.isIntersecting) {
+          setHasAnimated(true); // Start animation when in view
         }
       },
       { threshold: 0.1 }
@@ -44,7 +44,7 @@ const About = memo(() => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, [hasAnimated]);
+  }, []);
 
   return (
     <section id="about" className="py-12 bg-black" ref={sectionRef}>
@@ -61,12 +61,11 @@ const About = memo(() => {
         </div>
       </div>
       <div className="py-2 w-full flex justify-center bg-black">
-        {hasAnimated && (
-          <WorldMap
-            dots={dots}
-            className="w-[85%] h-80"
-          />
-        )}
+        <WorldMap
+          dots={dots}
+          className="w-[85%] h-80"
+          animateLines={hasAnimated} // Pass the animation state to WorldMap
+        />
       </div>
     </section>
   );

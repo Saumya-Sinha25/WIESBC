@@ -1,12 +1,36 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { Vortex } from "@/components/ui/vortex";
 import CustomLogo from "../public/cslogo.jpg";
 
-const VortexDemoSecond = memo(() => {
+const Hero = memo(() => {
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true); // Start animation when in view
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="w-[calc(100%-4rem)] mx-auto rounded-md h-screen overflow-hidden">
+    <div ref={heroRef} className="w-[calc(100%-4rem)] mx-auto rounded-md h-screen overflow-hidden">
       <Vortex
         backgroundColor="black"
         rangeY={1200}
@@ -16,7 +40,7 @@ const VortexDemoSecond = memo(() => {
         rangeSpeed={1.5}
         baseRadius={0.7}
         rangeRadius={1.4}
-        className="flex items-center justify-center w-full h-full"
+        className={`flex items-center justify-center w-full h-full ${isVisible ? 'animate-start' : 'opacity-0'}`} // Add animation class based on visibility
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
           <div className="text-center space-y-8 md:space-y-12">
@@ -62,6 +86,6 @@ const VortexDemoSecond = memo(() => {
   );
 });
 
-VortexDemoSecond.displayName = 'VortexDemoSecond';
+Hero.displayName = 'Hero';
 
-export default VortexDemoSecond;
+export default Hero;
