@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { Vortex } from "@/components/ui/vortex";
 import CustomLogo from "../public/cslogo.jpg";
+import Link from "next/link";
 
 const Hero = memo(() => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +31,7 @@ const Hero = memo(() => {
   }, []);
 
   return (
-    <div ref={heroRef} className="w-[calc(100%-4rem)] mx-auto rounded-md h-screen overflow-hidden">
+    <div ref={heroRef} className="w-full mx-auto rounded-md h-screen overflow-hidden">
       <Vortex
         backgroundColor="black"
         rangeY={1200}
@@ -40,7 +41,7 @@ const Hero = memo(() => {
         rangeSpeed={1.5}
         baseRadius={0.7}
         rangeRadius={1.4}
-        className={`flex items-center justify-center w-full h-full ${isVisible ? 'animate-start' : 'opacity-0'}`} // Add animation class based on visibility
+        className={`flex items-center justify-center w-full h-full ${isVisible ? 'animate-start' : 'opacity-0'}`} // Ensure full width
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
           <div className="text-center space-y-8 md:space-y-12">
@@ -70,13 +71,17 @@ const Hero = memo(() => {
               </p>
               
               <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 pt-8 w-full px-4">
-                <button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-amber-500 hover:bg-amber-600 rounded-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105 transform group">
-                  <Sparkles className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-spin transition-transform" />
-                  <span className="text-base md:text-lg">Join Our Chapter</span>
-                </button>
-                <button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-slate-800/80 hover:bg-slate-700 rounded-lg transition-all duration-300 hover:scale-105 transform border border-amber-500/30 hover:border-amber-500 text-base md:text-lg backdrop-blur-sm text-white">
-                  Learn More
-                </button>
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeX_oAlWl9f9--JF3Dz5rJD-7NkD0_IUr2rGDUTHBq2TfzfPQ/viewform" passHref>
+                  <button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-amber-500 hover:bg-amber-600 rounded-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105 transform group">
+                    <Sparkles className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-spin transition-transform" />
+                    <span className="text-base md:text-lg">Join Our Chapter</span>
+                  </button>
+                </Link>
+                <Link href="https://www.computer.org/membership" passHref>
+                  <button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-slate-800/80 hover:bg-slate-700 rounded-lg transition-all duration-300 hover:scale-105 transform border border-amber-500/30 hover:border-amber-500 text-base md:text-lg backdrop-blur-sm text-white">
+                    Learn More
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

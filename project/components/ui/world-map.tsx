@@ -17,6 +17,7 @@ export default memo(function WorldMap({
   dots = [],
   lineColor = "#f59e0b",
   className = "",
+  animateLines = false,
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const map = new DottedMap({ height: 100, grid: "diagonal" });
@@ -27,14 +28,6 @@ export default memo(function WorldMap({
     shape: "circle",
     backgroundColor: "#000000",
   });
-
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  useEffect(() => {
-    if (dots.length > 0) {
-      setHasAnimated(true);
-    }
-  }, [dots]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -66,7 +59,7 @@ export default memo(function WorldMap({
         viewBox="0 0 800 400"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
-        {hasAnimated && dots.map((dot, i) => {
+        {animateLines && dots.map((dot, i) => {
           if (i < dots.length - 1) {
             const startPoint = projectPoint(dot.lat, dot.lng);
             const endPoint = projectPoint(dots[i + 1].lat, dots[i + 1].lng);
@@ -104,25 +97,26 @@ export default memo(function WorldMap({
           </linearGradient>
         </defs>
 
-        {hasAnimated && dots.map((dot, i) => (
+        {dots.map((dot, i) => (
           <g key={`point-group-${i}`}>
             <circle
               cx={projectPoint(dot.lat, dot.lng).x}
               cy={projectPoint(dot.lat, dot.lng).y}
-              r="2"
+              r="4"
               fill={lineColor}
+              opacity="0.8"
             />
             <circle
               cx={projectPoint(dot.lat, dot.lng).x}
               cy={projectPoint(dot.lat, dot.lng).y}
-              r="2"
+              r="4"
               fill={lineColor}
               opacity="0.5"
             >
               <animate
                 attributeName="r"
-                from="2"
-                to="8"
+                from="4"
+                to="10"
                 dur="1.5s"
                 begin="0s"
                 repeatCount="indefinite"

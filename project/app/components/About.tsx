@@ -23,6 +23,11 @@ const About = memo(() => {
     { lat: 28.6139, lng: 77.209 }, 
     { lat: 43.1332, lng: 131.9113 }, 
     { lat: -1.2921, lng: 36.8219 },
+    { lat: 55.7558, lng: 37.6173 }, // Moscow
+    { lat: 35.6895, lng: 139.6917 }, // Tokyo
+    { lat: -33.4489, lng: -70.6693 }, // Santiago
+    { lat: 39.9042, lng: 116.4074 }, // Beijing
+    { lat: -34.6037, lng: -58.3816 }, // Buenos Aires
   ], []);
 
   useEffect(() => {
@@ -47,14 +52,14 @@ const About = memo(() => {
   }, []);
 
   return (
-    <section id="about" className="py-12 bg-black" ref={sectionRef}>
-      <div className="w-[calc(100%-4rem)] mx-auto rounded-md overflow-hidden">
-        <div className="bg-black backdrop-blur-sm p-8 pb-4">
+    <section id="about" className="py-6 sm:py-12 bg-black" ref={sectionRef}>
+      <div className="w-full max-w-7xl mx-auto rounded-md overflow-hidden">
+        <div className="bg-black backdrop-blur-sm p-4 sm:p-8 pb-4">
           <div className="flex flex-col items-center justify-center min-h-[20rem]">
-            <h2 className="text-5xl font-extrabold mt-8 mb-4">
+            <h2 className="text-3xl sm:text-5xl font-extrabold mt-4 mb-2">
               <span className='text-white'>Together</span> We <span className='text-amber-500'>Advance</span>
             </h2>
-            <p className="text-gray-400 text-sm sm:text-lg md:text-xl lg:text-2xl mt-8 max-w-3xl text-center">
+            <p className="text-gray-400 text-sm sm:text-lg md:text-xl lg:text-2xl mt-4 max-w-3xl text-center">
               A Global Network of Innovators: Connected Across Continents, United by Technology.
             </p>
           </div>
@@ -63,8 +68,8 @@ const About = memo(() => {
       <div className="py-2 w-full flex justify-center bg-black">
         <WorldMap
           dots={dots}
-          className="w-[85%] h-80"
-          animateLines={hasAnimated} // Pass the animation state to WorldMap
+          className="w-[90%] sm:w-[85%] h-80"
+          animateLines={hasAnimated}
         />
       </div>
     </section>
