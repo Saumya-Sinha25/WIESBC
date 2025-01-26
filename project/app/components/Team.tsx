@@ -1,9 +1,10 @@
+import React from 'react';
 import { Linkedin, Github } from "lucide-react"
-import Image from "next/image"
-import Anant from "../assets/anant.jpg"
-import Gaurang from "../assets/gaurang.jpg"
-import Kshitij from "../assets/kshitij.jpg"
-import Sahil from "../assets/sahil.jpg"     
+import Image from "next/image";
+import Anant from "@/assets/anant.jpg";
+import Gaurang from "@/assets/gaurang.jpg";
+import Kshitij from "@/assets/kshitij.jpg";
+import Sahil from "@/assets/sahil.jpg";     
 
 export default function TeamSection() {
   const teamMembers = [
