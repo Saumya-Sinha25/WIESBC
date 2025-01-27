@@ -1,11 +1,15 @@
 import { Mail, Github, Linkedin } from "lucide-react";
 import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 
 export default function ContactSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   return (
     <motion.section 
       id="contact" 
       className="py-16"
+      ref={sectionRef}
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       transition={{ duration: 0.5 }}

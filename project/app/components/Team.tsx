@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React, { memo, useRef } from "react"
 import Image from "next/image"
 import { Linkedin, Github } from "lucide-react"
 import { motion } from 'framer-motion';
@@ -39,10 +39,13 @@ const TeamSection = memo(() => {
     },
   ]
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   return (
     <motion.section 
       id="team" 
       className="py-16"
+      ref={sectionRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect, useRef, useState, useMemo } from "react";
+import React, { memo, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 
 const WorldMap = dynamic(
@@ -11,45 +11,40 @@ const WorldMap = dynamic(
 );
 
 const About = memo(() => {
-  const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const dots = useMemo(() => [
-    { lat: 64.2008, lng: -149.4937 }, 
-    { lat: 34.0522, lng: -118.2437 },
-    { lat: -15.7975, lng: -47.8919 }, 
-    { lat: 38.7223, lng: -9.1393 }, 
-    { lat: 51.5074, lng: -0.1278 }, 
-    { lat: 28.6139, lng: 77.209 }, 
-    { lat: 43.1332, lng: 131.9113 }, 
-    { lat: -1.2921, lng: 36.8219 },
-    { lat: 55.7558, lng: 37.6173 }, // Moscow
-    { lat: 35.6895, lng: 139.6917 }, // Tokyo
-    { lat: -33.4489, lng: -70.6693 }, // Santiago
-    { lat: 39.9042, lng: 116.4074 }, // Beijing
-    { lat: -34.6037, lng: -58.3816 }, // Buenos Aires
+    { lat: 60.0, lng: -135.0 }, // Alaska
+    { lat: 34.0, lng: -118.0 }, // Los Angeles
+    { lat: -15.0, lng: -47.0 }, // Brazil
+    { lat: 38.0, lng: -9.0 }, // Lisbon
+    { lat: 51.5, lng: -0.1 }, // London
+    { lat: 28.6, lng: 77.2 }, // New Delhi
+    { lat: 43.0, lng: 131.9 }, // Vladivostok
+    { lat: -1.3, lng: 36.8 }, // Nairobi
+    { lat: 55.8, lng: 37.6 }, // Moscow
+    { lat: 35.7, lng: 139.7 }, // Tokyo
+    { lat: -33.5, lng: -70.6 }, // Santiago
+    { lat: 39.9, lng: 116.4 }, // Beijing
+    { lat: -34.6, lng: -58.4 }, // Buenos Aires
+    { lat: -25.2744, lng: 133.7751 }, // Australia (Central)
+    { lat: 1.3521, lng: 103.8198 }, // Singapore
+    { lat: 55.0, lng: 13.0 }, // Copenhagen, Denmark
   ], []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasAnimated(true); // Start animation when in view
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const optimizedConnections = useMemo(() => {
+    // Define connections strategically to minimize clutter
+    return [
+      [dots[0], dots[1]], // Alaska -> Los Angeles
+      [dots[1], dots[3]], // Los Angeles -> London
+      [dots[3], dots[4]], // London -> New Delhi
+      [dots[4], dots[5]], // New Delhi -> Vladivostok
+      [dots[5], dots[6]], // Vladivostok -> Tokyo
+      [dots[6], dots[9]], // Tokyo -> Buenos Aires
+      [dots[4], dots[7]], // New Delhi -> Santiago
+      [dots[7], dots[10]], // Santiago -> Singapore
+    ];
+  }, [dots]);
 
   return (
     <section id="about" className="py-6 sm:py-12 bg-black" ref={sectionRef}>
@@ -69,7 +64,7 @@ const About = memo(() => {
         <WorldMap
           dots={dots}
           className="w-[90%] sm:w-[85%] h-80"
-          animateLines={hasAnimated}
+          animateLines={true}
         />
       </div>
     </section>

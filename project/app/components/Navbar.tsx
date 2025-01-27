@@ -2,6 +2,7 @@ import React, { useState, memo } from "react"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import CustomLogo2 from "../public/csgulogo.png"
+import Link from "next/link"
 
 const Navbar = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -16,14 +17,16 @@ const Navbar = memo(() => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
-            <Image 
-              src={CustomLogo2.src} 
-              alt="CSGU Logo" 
-              width={140} 
-              height={56} 
-              priority 
-              className="w-35 h-14" 
-            />
+            <Link href="#hero" passHref>
+              <Image 
+                src={CustomLogo2.src} 
+                alt="CSGU Logo" 
+                width={140} 
+                height={56} 
+                priority 
+                className="w-35 h-14 cursor-pointer"
+              />
+            </Link>
           </div>
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">

@@ -1,7 +1,10 @@
 import { BookOpen, Users, Calendar } from "lucide-react";
 import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 
 export default function ResourcesSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   const resources = [
     {
       icon: <BookOpen className="w-8 h-8 text-amber-400 mb-4" />,
@@ -29,6 +32,7 @@ export default function ResourcesSection() {
     <motion.section 
       id="resources" 
       className="py-16"
+      ref={sectionRef}
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       transition={{ duration: 0.5 }}

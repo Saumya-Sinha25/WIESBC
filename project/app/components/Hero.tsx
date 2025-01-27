@@ -34,13 +34,13 @@ const Hero = memo(() => {
     <div ref={heroRef} className="w-full mx-auto rounded-md h-screen overflow-hidden">
       <Vortex
         backgroundColor="black"
-        rangeY={1200}
-        particleCount={1500}
+        rangeY={800}
+        particleCount={800}
         baseHue={225}
-        baseSpeed={0.15}
-        rangeSpeed={1.5}
-        baseRadius={0.7}
-        rangeRadius={1.4}
+        baseSpeed={0.1}
+        rangeSpeed={0.8}
+        baseRadius={0.5}
+        rangeRadius={1.0}
         className={`flex items-center justify-center w-full h-full ${isVisible ? 'animate-start' : 'opacity-0'}`} // Ensure full width
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
