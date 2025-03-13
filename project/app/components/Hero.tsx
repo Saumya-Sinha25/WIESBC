@@ -47,8 +47,8 @@ const Hero = memo(() => {
                     <div className="text-center space-y-8 md:space-y-12">
                         <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8">
                             <div className="relative">
-                                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#752F8A] to-[#3F1053] opacity-75 blur-lg animate-pulse" />
-                                <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden">
+                                <div className="absolute -inset-1 rounded- bg-gradient-to-r from-[#752F8A] to-[#3F1053] opacity-75 blur-lg animate-pulse" />
+                                <div className="relative  h-16  md:h-24 overflow-hidden">
                                     <Image
                                         src={CustomLogo.src}
                                         alt="CS Logo"
