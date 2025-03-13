@@ -45,7 +45,7 @@ export default function EventsSection() {
                                 <p className="text-gray-400 mb-4">{event.description}</p>
                                 <p className="text-sm text-[#752F8A]">{event.date}</p>
                                 <Link href={event.registrationLink} className="mt-4 inline-block bg-[#752F8A] text-black py-2 px-4 rounded transition hover:bg-[#752F8A]">
-                                    Register Now
+                                    Know More
                                 </Link>
                             </motion.div>
                         ))}
