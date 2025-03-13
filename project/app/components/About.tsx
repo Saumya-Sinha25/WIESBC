@@ -52,7 +52,7 @@ const About = memo(() => {
         <div className="bg-black backdrop-blur-sm p-4 sm:p-8 pb-4">
           <div className="flex flex-col items-center justify-center min-h-[20rem]">
             <h2 className="text-3xl sm:text-5xl font-extrabold mt-4 mb-2">
-              <span className='text-white'>Together</span> We <span className='text-amber-500'>Advance</span>
+              <span className='text-white'>Together</span> We <span className='text-[#752F8A]'>Advance</span>
             </h2>
             <p className="text-gray-400 text-sm sm:text-lg md:text-xl lg:text-2xl mt-4 max-w-3xl text-center">
               A Global Network of Innovators: Connected Across Continents, United by Technology.
